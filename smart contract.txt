@@ -1,0 +1,65 @@
+pragma solidity ^0.6.0;
+
+contract Collaboration {
+// User addresses and their associated roles
+mapping(address => bool) public admins;
+mapping(address => bool) public users;
+
+// Chat message history
+string[] public messages;
+
+// Tip jar balance
+uint public balance;
+
+// Event for when a new message is received
+event NewMessage(string message);
+
+// Function to send a message to the chat
+function sendMessage(string memory message) public {
+// Check if the user is a member of the chat
+require(admins[msg.sender] || users[msg.sender], "Unauthorized");
+
+// Add the message to the message history
+messages.push(message);
+
+// Emit the NewMessage event
+emit NewMessage(message);
+}
+
+// Function to add a new user to the chat
+function addUser(address user) public {
+// Only administrators can add new users
+require(admins[msg.sender], "Unauthorized");
+
+// Add the user to the chat
+users[user] = true;
+}
+
+// Function to remove a user from the chat
+function removeUser(address user) public {
+// Only administrators can remove users
+require(admins[msg.sender], "Unauthorized");
+
+// Remove the user from the chat
+delete users[user];
+}
+
+// Function to ban a user from the chat
+function banUser(address user) public {
+// Only administrators can ban users
+require(admins[msg.sender], "Unauthorized");
+
+// Ban the user from the chat
+delete users[user];
+delete admins[user];
+}
+
+// Function to tip the chat
+function tip(uint amount) public payable {
+// Only members of the chat can tip
+require(admins[msg.sender] || users[msg.sender], "Unauthorized");
+
+// Add the tip to the balance
+balance += amount;
+}
+}

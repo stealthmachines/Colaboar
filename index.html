@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <title>Collaboration Website</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <!-- Add the chat window -->
+    <div id="chat-window">
+      <div id="chat-messages"></div>
+      <input type="text" id="chat-input" placeholder="Enter message">
+      <button id="send-button">Send</button>
+    </div>
+    
+    <!-- Add the whiteboard -->
+    <div id="whiteboard"></div>
+    
+    <!-- Add the tip jar -->
+    <div id="tip-jar">
+      <p>Tip Jar</p>
+      <input type="text" id="tip-amount" placeholder="Enter amount">
+      <button id="send-tip">Send</button>
+    </div>
+    
+    <!-- Add the private chat button -->
+    <button id="private-chat-button">Private Chat</button>
+    
+    <!-- Load the JavaScript files -->
+    <script src="main.js"></script>
+    <script src="ipfs.js"></script>
+    <script src="ethereum.js"></script>
+    <script src="collaboration.js"></script>
+  </body>
+</html>
